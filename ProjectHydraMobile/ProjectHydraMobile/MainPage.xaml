@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHydraMobile.MainPage"
+             xmlns:local="clr-namespace:ProjectHydraMobile.ViewModels">
+    <ContentPage.BindingContext>
+        <local:LoginViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Logowanie" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <StackLayout Padding="5">
+            <Label Text="Email:"/>
+            <Entry Text="{Binding LoginStr}"/>
+            <Label Text="Hasło:"/>
+            <Entry Text="{Binding PasswordStr}" IsPassword="True"/>
+            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding IsErrorVisible}" TextColor="Red"/>
+            <Button Text="Zaloguj" Command="{Binding LoginCommand}"/>
+        </StackLayout>
+        
+    </StackLayout>
+</ContentPage>
