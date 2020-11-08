@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfApp3
+namespace ProjectHydraDesktop
 {
     public static class ServiceProviderFactory
     {

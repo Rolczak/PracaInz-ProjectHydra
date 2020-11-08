@@ -25,6 +25,8 @@
     <Compile Remove="Migrations\20201001122113_AddUnitToUser.Designer.cs" />
     <Compile Remove="Migrations\20201013134753_AddClassesToDb.cs" />
     <Compile Remove="Migrations\20201013134753_AddClassesToDb.Designer.cs" />
+    <Compile Remove="Migrations\20201026081251_AddTimeAndCommentToClass.cs" />
+    <Compile Remove="Migrations\20201026081251_AddTimeAndCommentToClass.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

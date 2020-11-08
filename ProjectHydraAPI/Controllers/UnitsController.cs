@@ -27,9 +27,16 @@ namespace ProjectHydraAPI.Controllers
 
         // GET: api/Units
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Unit>>> GetUnits()
+        public async Task<ActionResult<List<UnitVM>>> GetUnits()
         {
-            return await _context.Units.ToListAsync();
+            var units = await _context.Units
+                .Include(u => u.Commander)
+                .ThenInclude(c => c.Rank)
+                .Include(u => u.DeputyCommander)
+                .ThenInclude(dc =>dc.Rank)
+                .ToListAsync();
+
+            return _mapper.Map<List<Unit>, List<UnitVM>>(units);
         }
 
         // GET: api/Units/5
@@ -50,7 +57,7 @@ namespace ProjectHydraAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUnit(int id, Unit unit)
+        public async Task<IActionResult> PutUnit(int id, [FromBody] Unit unit)
         {
             if (id != unit.Id)
             {

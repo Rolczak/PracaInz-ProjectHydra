@@ -1,0 +1,98 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ProjectHydraDesktop.TacticalEditor.DiagramDesigner"
+                    xmlns:c="clr-namespace:ProjectHydraDesktop.TacticalEditor">
+    <!-- DataTemplate for DesignerCanvas look and feel -->
+    <DataTemplate DataType="{x:Type local:FriendlyUnitViewModel}">
+        <Grid>
+            <Rectangle Width="50" Height="30"  Stroke="Black" StrokeThickness="1" IsHitTestVisible="False" Fill="{DynamicResource FriendlyColor}">
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ConfirmedPosition}" Value="False">
+                                <Setter Property="StrokeDashArray" Value="4 4" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ConfirmedPosition}" Value="True">
+                                <Setter Property="StrokeDashArray" Value="1 0" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
+            <ContentControl Width="50" Height="50">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="../UnitTypeStyle.xaml" />
+                </ContentControl.Resources>
+                <ContentControl.Style>
+                    <Style TargetType="{x:Type ContentControl}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Type}" Value="{x:Static c:UnitType.None}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource None}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="{x:Static c:UnitType.Infantry}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Infantry}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="{x:Static c:UnitType.MotorizedInfantry}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource MotorizedInfantry}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="{x:Static c:UnitType.MechanizedInfantry}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource MechanizedInfantry}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Type}" Value="{x:Static c:UnitType.Armour}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Armour}}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+            <ContentControl Width="50" Height="20" Margin="0 0 0 50">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="../UnitSize.xaml" />
+                </ContentControl.Resources>
+                <ContentControl.Style>
+                    <Style TargetType="{x:Type ContentControl}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.None}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource None}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Section}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Section}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Team}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Team}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Platoon}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Platoon}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Company}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Company}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Battalion}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Battalion}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Regiment}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Regiment}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Brigade}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Brigade}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Division}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Division}}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Size}" Value="{x:Static c:UnitSize.Corps}">
+                                <Setter Property="ContentTemplate" Value="{Binding Source={StaticResource Corps}}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+            <TextBlock Visibility="{Binding Probably, Converter={x:Static local:ReverseBoolToVisibilityConverter.Instance}}" Text="?" IsHitTestVisible="False" Margin="75,25,0,0" Foreground="Black" />
+            <Button HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="5"
+                    Template="{StaticResource infoButtonTemplate}"
+                    Command="{Binding ShowDataChangeWindowCommand}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

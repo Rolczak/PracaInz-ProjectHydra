@@ -5,9 +5,9 @@ using ProjectHydraRestLibary.Models;
 using ProjectHydraRestLibary.Services;
 using System;
 using System.Windows;
-using WpfApp3.Views;
+using ProjectHydraDesktop.Views;
 
-namespace WpfApp3
+namespace ProjectHydraDesktop
 {
     /// <summary>
     /// Interaction logic for App.xaml

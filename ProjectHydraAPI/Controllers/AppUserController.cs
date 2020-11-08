@@ -112,5 +112,13 @@ namespace ProjectHydraAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("selectList")]
+        public async Task<ActionResult<List<UserViewModel>>> GetUsersForSelectList()
+        {
+            var ranks = await _db.Users.Include(u => u.Rank).ToListAsync();
+            var listOfRanks = _mapper.Map<List<AppUser>, List<UserViewModel>>(ranks);
+            return listOfRanks;
+        }
     }
 }

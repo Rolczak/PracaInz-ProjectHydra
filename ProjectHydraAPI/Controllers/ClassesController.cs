@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using ProjectHydraAPI.DataAccess;
 using ProjectHydraAPI.Models;
 
@@ -15,45 +17,35 @@ namespace ProjectHydraAPI.Controllers
     public class ClassesController : ControllerBase
     {
         private readonly HydraDbContext _context;
-
-        public ClassesController(HydraDbContext context)
+        private readonly IMapper _mapper;
+        public ClassesController(HydraDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-
-        // GET: api/Classes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Class>>> GetClasses()
-        {
-            return await _context.Classes.ToListAsync();
-        }
-
         // GET: api/Classes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Class>> GetClass(int id)
+        public async Task<ActionResult<ClassVM>> GetClass(int id)
         {
-            var @class = await _context.Classes.FindAsync(id);
+            var lesson = await _context.Classes.FindAsync(id);
 
-            if (@class == null)
+            if (lesson == null)
             {
                 return NotFound();
             }
 
-            return @class;
+            return _mapper.Map<Class, ClassVM>(lesson);
         }
 
-        // PUT: api/Classes/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClass(int id, Class @class)
+        public async Task<IActionResult> PutClass(int id, [FromBody] Class lesson)
         {
-            if (id != @class.Id)
+            if (id != lesson.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(@class).State = EntityState.Modified;
+            _context.Entry(lesson).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +53,7 @@ namespace ProjectHydraAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClassExists(id))
+                if (!ClassExist(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +66,58 @@ namespace ProjectHydraAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Classes
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Class>> PostClass(Class @class)
+        private bool ClassExist(int id)
         {
-            _context.Classes.Add(@class);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetClass", new { id = @class.Id }, @class);
+            return _context.Classes.Any(e => e.Id == id);
         }
 
-        // DELETE: api/Classes/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Class>> DeleteClass(int id)
+        [HttpPost]
+        public async Task<ActionResult<Class>> PostUnit([FromBody]Class lesson)
         {
-            var @class = await _context.Classes.FindAsync(id);
-            if (@class == null)
+            _context.Classes.Add(lesson);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetClass", new { id = lesson.Id }, lesson);
+        }
+
+        // GET: api/Classes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ClassVM>>> GetClasses()
+        {
+            var classes = await _context.Classes.Include(c=>c.Teacher).ThenInclude(t=>t.Rank).Include(c=>c.Unit).ToListAsync();
+            return _mapper.Map<List<Class>, List<ClassVM>>(classes);
+        }
+
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<Class>>> GetUserClasses(string userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if(user == null)
             {
                 return NotFound();
             }
+            var unit = await _context.Units.Include(u => u.Parent).Where(u => u.Id == user.UnitId).FirstOrDefaultAsync();
+            if(unit == null)
+            {
+                return NotFound();
+            }
+            IList<int> ParentUnitsIds = new List<int>();
 
-            _context.Classes.Remove(@class);
-            await _context.SaveChangesAsync();
+            do
+            {
+                ParentUnitsIds.Add(unit.Id);
+                unit = await _context.Units.FindAsync(unit.ParentId);
+            } while (unit != null);
 
-            return @class;
-        }
-
-        private bool ClassExists(int id)
-        {
-            return _context.Classes.Any(e => e.Id == id);
+            try
+            {
+                var classes = await _context.Classes.Include(c => c.Teacher).ThenInclude(t => t.Rank).Where(c => ParentUnitsIds.Contains(c.UnitId.GetValueOrDefault())).ToListAsync();
+                return Ok(_mapper.Map<List<Class>, List<ClassVM>>(classes));
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

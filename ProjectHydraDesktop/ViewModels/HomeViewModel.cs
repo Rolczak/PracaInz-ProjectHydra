@@ -1,4 +1,4 @@
-﻿namespace WpfApp3.ViewModels
+﻿namespace ProjectHydraDesktop.ViewModels
 {
     class HomeViewModel
     {

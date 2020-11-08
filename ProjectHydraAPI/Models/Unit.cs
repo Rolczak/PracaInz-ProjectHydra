@@ -27,5 +27,17 @@ namespace ProjectHydraAPI.Models
 
         public virtual List<AppUser> SoldiersInUnit { get; set; }
     }
+    public class UnitVM
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string CommanderId { get; set; }
+        public string CommanderName { get; set; }
+        public string DeputyCommanderId { get; set; }
+        public string DeputyCommanderName { get; set; }
+        public string ParentUnitName { get; set; }
+
+    }
 }
+
 

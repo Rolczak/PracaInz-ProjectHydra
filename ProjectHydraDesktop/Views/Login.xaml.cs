@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 
-namespace WpfApp3.Views
+namespace ProjectHydraDesktop.Views
 {
     /// <summary>
     /// Logika interakcji dla klasy Login.xaml

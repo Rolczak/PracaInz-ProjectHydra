@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
-namespace WpfApp3
+namespace ProjectHydraDesktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -22,7 +22,7 @@ namespace WpfApp3
             var selectedItem = (NavigationViewItem)args.SelectedItem;
             if (selectedItem != null)
             {
-                string pageName = "WpfApp3.Pages." + (string)selectedItem.Tag;
+                string pageName = "ProjectHydraDesktop.Pages." + (string)selectedItem.Tag;
                 Type pageType = Assembly.GetExecutingAssembly().GetType(pageName);
                 ContentFrame.Navigate(pageType);
 

@@ -244,6 +244,9 @@ namespace ProjectHydraAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -252,6 +255,9 @@ namespace ProjectHydraAPI.Migrations
 
                     b.Property<string>("TeacherId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Time")
+                        .HasColumnType("real");
 
                     b.Property<string>("Topic")
                         .HasColumnType("nvarchar(max)");

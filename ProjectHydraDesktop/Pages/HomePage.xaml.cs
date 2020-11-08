@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using static ProjectHydraRestLibary.Models.User;
 
-namespace WpfApp3.Pages
+namespace ProjectHydraDesktop.Pages
 {
     /// <summary>
     /// Logika interakcji dla klasy HomePage.xaml
