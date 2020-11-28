@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Ink;
+using System.Windows.Media;
 
 namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
 {
@@ -27,6 +29,35 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
             }
         }
 
+        private DrawingAttributes _inkBrush = new DrawingAttributes()
+        {
+            FitToCurve = true,
+            Color = Colors.Black,
+            Height = 1,
+            Width = 1,
+            StylusTip = StylusTip.Ellipse
+        };
+
+        public DrawingAttributes InkBrush
+        {
+            get { return _inkBrush; }
+            set {
+                _inkBrush = value;
+                NotifyChanged("InkBrush");
+            }
+        }
+
+
+        private bool _isDrawingChecked = true;
+        public bool IsDrawingChecked
+        {
+            get { return _isDrawingChecked; }
+            set
+            {
+                _isDrawingChecked = value;
+                NotifyChanged("IsDrawingChecked");
+            }
+        }
 
         public SimpleCommand AddItemCommand { get; private set; }
         public SimpleCommand RemoveItemCommand { get; private set; }
@@ -73,6 +104,7 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
         private void ExecuteCreateNewDiagramCommand(object parameter)
         {
             Items.Clear();
+            Mediator.Instance.NotifyColleaguesAsync<bool>("ClearCanvas",true);
         }
     }
 }

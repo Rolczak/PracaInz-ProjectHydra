@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHydraMobile.Pages.MyGradesPage"
+             xmlns:local="clr-namespace:ProjectHydraRestLibary.ViewModels;assembly=ProjectHydraRestLibary">
+    <ContentPage.BindingContext>
+        <local:MyGradesViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <ListView ItemsSource="{Binding Grades}" HasUnevenRows="True" >
+                <ListView.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="Zajęcia" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="1" Text="Ocena" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="2" Text="Komentarz" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding LessonName}" LineBreakMode="WordWrap" FontSize="Body"/>
+
+                                <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding GradeNumber}" LineBreakMode="WordWrap" FontSize="Body" FontAttributes="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding GradeNumber}" Value="2.0">
+                                                    <Setter Property="Background" Value="{StaticResource Grade2}" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding GradeNumber}" Value="2.5">
+                                                    <Setter Property="Background" Value="{StaticResource Grade25}" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding GradeNumber}" Value="3.0">
+                                                    <Setter Property="Background" Value="{StaticResource Grade3}" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding GradeNumber}" Value="3.5">
+                                                    <Setter Property="Background" Value="{StaticResource Grade35}" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding GradeNumber}" Value="4">
+                                                    <Setter Property="Background" Value="{StaticResource Grade4}" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding GradeNumber}" Value="4.5">
+                                                    <Setter Property="Background" Value="{StaticResource Grade45}" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding GradeNumber}" Value="5">
+                                                    <Setter Property="Background" Value="{StaticResource Grade5}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+
+                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding Comment}" LineBreakMode="WordWrap" FontSize="Body"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

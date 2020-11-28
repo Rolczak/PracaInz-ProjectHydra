@@ -29,6 +29,8 @@ namespace ProjectHydraAPI.DataAccess
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<Class> Classes { get; set; }
+
+        public DbSet<Grade> Grades { get; set; }
     }
 
 

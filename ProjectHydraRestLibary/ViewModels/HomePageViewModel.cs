@@ -22,7 +22,7 @@ namespace ProjectHydraRestLibary.ViewModels
 
         private async Task LoadUserDataAsync()
         {
-            UserDetails = await _userService.getUserDetails(_authModel.UserId);
+            UserDetails = await _userService.GetUserDetails(_authModel.UserId);
         }
 
 

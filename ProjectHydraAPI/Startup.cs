@@ -93,11 +93,13 @@ namespace ProjectHydraAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
+            app.UseCors(builder => 
+            builder
+            .AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod());
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

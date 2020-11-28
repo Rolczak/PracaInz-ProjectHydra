@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
 {
@@ -339,11 +340,12 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
         public void NotifyColleaguesAsync<T>(string key, T message)
         {
             Func<string, T, bool> smaFunc = NotifyColleagues;
-            smaFunc.BeginInvoke(key, message, ia =>
-            {
-                try { smaFunc.EndInvoke(ia); }
-                catch { }
-            }, null);
+            var workTask = Task.Run(() => smaFunc.Invoke(key, message));
+            //smaFunc.BeginInvoke(key, message, ia =>
+            //{
+            //    try { smaFunc.EndInvoke(ia); }
+            //    catch { }
+            //}, null);
         }
 
         /// <summary>
@@ -356,11 +358,7 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
         public void NotifyColleaguesAsync<T>(T message)
         {
             Func<T, bool> smaFunc = NotifyColleagues;
-            smaFunc.BeginInvoke(message, ia =>
-            {
-                try { smaFunc.EndInvoke(ia); }
-                catch { }
-            }, null);
+            var workTask = Task.Run(() => smaFunc.Invoke(message));
         }
         #endregion
     }

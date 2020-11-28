@@ -274,6 +274,34 @@ namespace ProjectHydraAPI.Migrations
                     b.ToTable("Classes");
                 });
 
+            modelBuilder.Entity("ProjectHydraAPI.Models.Grade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("GradeNumber")
+                        .HasColumnType("real");
+
+                    b.Property<int>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Grades");
+                });
+
             modelBuilder.Entity("ProjectHydraAPI.Models.Rank", b =>
                 {
                     b.Property<int>("Id")
@@ -394,6 +422,19 @@ namespace ProjectHydraAPI.Migrations
                     b.HasOne("ProjectHydraAPI.Models.Unit", "Unit")
                         .WithMany()
                         .HasForeignKey("UnitId");
+                });
+
+            modelBuilder.Entity("ProjectHydraAPI.Models.Grade", b =>
+                {
+                    b.HasOne("ProjectHydraAPI.Models.Class", "Lesson")
+                        .WithMany()
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectHydraAPI.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ProjectHydraAPI.Models.Unit", b =>

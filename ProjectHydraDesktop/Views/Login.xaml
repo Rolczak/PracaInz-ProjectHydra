@@ -16,12 +16,16 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="6*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Logowanie" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" />
-            <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+
+            <Image x:Name="LogoImage" Grid.Column="1" Grid.Row="0" RenderOptions.BitmapScalingMode="HighQuality">
+            </Image>
+            <TextBlock Grid.Row="1" Text="Logowanie" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" />
+            <StackPanel Grid.Row="2" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Nazwa Użytkownika: " Width="150" />
                     <TextBox TextWrapping="Wrap" Text="{Binding Path=LoginStr, Mode=TwoWay}" Width="250"/>

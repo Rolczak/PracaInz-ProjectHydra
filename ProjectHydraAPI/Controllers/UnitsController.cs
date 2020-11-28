@@ -33,7 +33,7 @@ namespace ProjectHydraAPI.Controllers
                 .Include(u => u.Commander)
                 .ThenInclude(c => c.Rank)
                 .Include(u => u.DeputyCommander)
-                .ThenInclude(dc =>dc.Rank)
+                .ThenInclude(dc => dc.Rank)
                 .ToListAsync();
 
             return _mapper.Map<List<Unit>, List<UnitVM>>(units);
@@ -41,16 +41,22 @@ namespace ProjectHydraAPI.Controllers
 
         // GET: api/Units/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Unit>> GetUnit(int id)
+        public async Task<ActionResult<UnitDetails>> GetUnit(int id)
         {
-            var unit = await _context.Units.FindAsync(id);
+            var unit = await _context.Units
+                .Include(u => u.SoldiersInUnit)
+                .Include(u => u.Commander).ThenInclude(user => user.Rank)
+                .Include(u => u.DeputyCommander).ThenInclude(user => user.Rank)
+                .Include(u => u.ChildernUnits)
+                .Include(u => u.Parent)
+                .Where(u => u.Id == id).FirstOrDefaultAsync();
 
             if (unit == null)
             {
                 return NotFound();
             }
 
-            return unit;
+            return _mapper.Map<Unit, UnitDetails>(unit);
         }
 
         // PUT: api/Units/5

@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProjectHydraDesktop"
-             xmlns:ui="http://schemas.modernwpf.com/2019">
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             DispatcherUnhandledException="App_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,13 +27,32 @@
                 <ResourceDictionary Source="/TacticalEditor/DiagramDesigner/Resources/DesignerItems/TestDataTemplate.xaml" />
                 <ResourceDictionary Source="/TacticalEditor/DiagramDesigner/Resources/DesignerItems/FriendlyUnitDataTemplate.xaml" />
                 <ResourceDictionary Source="/TacticalEditor/DiagramDesigner/Resources/DesignerItems/EnemyUnitDataTemplate.xaml" />
+                <ResourceDictionary Source="/TacticalEditor/DiagramDesigner/Resources/DesignerItems/NeutralUnitDataTemplate.xaml" />
+                <ResourceDictionary Source="/TacticalEditor/DiagramDesigner/Resources/DesignerItems/UnknownUnitDataTemplate.xaml" />
+                <ResourceDictionary Source="/TacticalEditor/DiagramDesigner/Resources/DesignerItems/TextDataTemplate.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <SolidColorBrush x:Key="FriendlyColor" Color="#FF00CCFF"/>
-            <SolidColorBrush x:Key="EnemyColor" Color="#FFFF7C80"/>
+            <SolidColorBrush x:Key="EnemyColor" Color="#ff0000"/>
             <SolidColorBrush x:Key="UnknowColor" Color="Yellow"/>
             <SolidColorBrush x:Key="NeutralColor" Color="Lime" />
+            
+            <!-- Grades -->
+            <SolidColorBrush x:Key="Grade2" Color="#e52d2d "/>
+            <SolidColorBrush x:Key="Grade25" Color="#eb641a"/>
+            <SolidColorBrush x:Key="Grade3" Color="#eb901a"/>
+            <SolidColorBrush x:Key="Grade35" Color="#d3ba36" />
+            <SolidColorBrush x:Key="Grade4" Color="#a0c236" />
+            <SolidColorBrush x:Key="Grade45" Color="#5fb823" />
+            <SolidColorBrush x:Key="Grade5" Color="#3ea52a" />
+
+            <Style TargetType="ScrollViewer" BasedOn="{StaticResource DefaultScrollViewerStyle}">
+                
+            </Style>
         </ResourceDictionary>
+        
     </Application.Resources>
+
+
 </Application>

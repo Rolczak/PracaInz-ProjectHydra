@@ -30,7 +30,7 @@ namespace ProjectHydraAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] RegistrationViewModel model)
+        public async Task<ActionResult<AppUser>> Post([FromBody] RegistrationViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -42,12 +42,13 @@ namespace ProjectHydraAPI.Controllers
                 var result = await _userManager.CreateAsync(userIdentity, model.Password);
                 await _userManager.AddToRoleAsync(userIdentity, RolesStrings.User);
                 await _dbContext.SaveChangesAsync();
-                return new OkObjectResult("Account created");
+                return userIdentity;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
         }
     }
 }

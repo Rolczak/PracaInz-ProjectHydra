@@ -13,9 +13,11 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
         private Canvas zoomCanvas;
         private Slider zoomSlider;
         private ScaleTransform scaleTransform;
-        private double mouseOffsetX = 0.0;
-        private double mouseOffsety = 0.0;
 
+        public ZoomBox()
+        {
+            Mediator.Instance.Register(this);
+        }
         #region DPs
 
         #region ScrollViewer
@@ -151,6 +153,7 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
             double scaleX = x / w;
             double scaleY = y / h;
             scale = (scaleX < scaleY) ? scaleX : scaleY;
+            Mediator.Instance.NotifyColleaguesAsync<double>("ChangeScale", scale);
             xOffset = (x - scale * w) / 2;
             yOffset = (y - scale * h) / 2;
         }

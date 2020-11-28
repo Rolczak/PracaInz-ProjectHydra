@@ -17,7 +17,8 @@
                    HorizontalContentAlignment="Center"
                    VerticalAlignment="Center"
                    VerticalContentAlignment="Center"
-                   FontSize="12" />
+                   FontSize="12" 
+                   Foreground="Black"/>
         </Grid>
 
         <ControlTemplate.Triggers>

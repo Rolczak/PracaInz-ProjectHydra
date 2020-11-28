@@ -8,8 +8,9 @@
     </ContentPage.BindingContext>
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Logowanie" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Image Source="logowhite.png" />
         </Frame>
+        <Label Text="Logowanie" HorizontalTextAlignment="Center" FontSize="36"/>
         <StackLayout Padding="5">
             <Label Text="Email:"/>
             <Entry Text="{Binding LoginStr}"/>

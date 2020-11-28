@@ -9,6 +9,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
 using System.Linq;
+using System.Windows.Shapes;
 
 namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
 {
@@ -47,7 +48,6 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
                 }
             }
         }
-
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
@@ -108,7 +108,6 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-
             if (SourceConnector != null)
             {
                 if (e.LeftButton == MouseButtonState.Pressed)

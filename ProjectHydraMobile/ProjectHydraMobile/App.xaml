@@ -3,6 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHydraMobile.App">
     <Application.Resources>
+        <StyleSheet Source="/Styles/Style.css" />
 
+        <SolidColorBrush x:Key="Grade2" Color="#e52d2d "/>
+        <SolidColorBrush x:Key="Grade25" Color="#eb641a"/>
+        <SolidColorBrush x:Key="Grade3" Color="#eb901a"/>
+        <SolidColorBrush x:Key="Grade35" Color="#d3ba36" />
+        <SolidColorBrush x:Key="Grade4" Color="#a0c236" />
+        <SolidColorBrush x:Key="Grade45" Color="#5fb823" />
+        <SolidColorBrush x:Key="Grade5" Color="#3ea52a" />
     </Application.Resources>
 </Application>

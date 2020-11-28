@@ -29,10 +29,13 @@ namespace ProjectHydraMobile
         }
         private void ConfigureServices(IServiceCollection services)
         {
-            ApiHelper.BaseApiUrl = "https://10.0.2.2:44305";
+            ApiHelper.BaseApiUrl = "https://10.0.2.2:5001";
             services.AddSingleton<IApiHelper, ApiHelper>();
             services.AddSingleton<IAuthModel, AuthModel>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILessonService, LessonService>();
+            services.AddScoped<IUnitService, UnitService>();
+            services.AddScoped<IGradesService, GradesService>();
         }
 
         protected override void OnSleep()

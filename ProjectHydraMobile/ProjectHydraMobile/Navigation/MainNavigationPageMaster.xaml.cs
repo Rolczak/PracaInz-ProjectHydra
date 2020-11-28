@@ -47,10 +47,9 @@ namespace ProjectHydraMobile.Navigation
                 MenuItems = new ObservableCollection<MainNavigationPageMasterMenuItem>(new[]
                 {
                     new MainNavigationPageMasterMenuItem { Id = 0, Title = "Strona Domowa", TargetType = typeof(HomePage) },
-                    new MainNavigationPageMasterMenuItem { Id = 1, Title = "Page 2" },
-                    new MainNavigationPageMasterMenuItem { Id = 2, Title = "Page 3" },
-                    new MainNavigationPageMasterMenuItem { Id = 3, Title = "Page 4" },
-                    new MainNavigationPageMasterMenuItem { Id = 4, Title = "Page 5" },
+                    new MainNavigationPageMasterMenuItem { Id = 1, Title = "Moje zajęcia", TargetType = typeof(MyLessons) },
+                    new MainNavigationPageMasterMenuItem { Id = 2, Title = "Moje oceny", TargetType = typeof(MyGradesPage) },
+                    new MainNavigationPageMasterMenuItem { Id = 3, Title = "Mój pododdział", TargetType = typeof(MyUnitPage) },
                 });
                 _authModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<IAuthModel>();
                 _userService = ServiceProviderFactory.ServiceProvider.GetRequiredService<IUserService>();
@@ -59,7 +58,7 @@ namespace ProjectHydraMobile.Navigation
 
             private async Task LoadUserDataAsync()
             {
-                UserDetailsModel user = await _userService.getUserDetails(_authModel.UserId);
+                UserDetailsModel user = await _userService.GetUserDetails(_authModel.UserId);
                 Username = user.Username;
             }
 

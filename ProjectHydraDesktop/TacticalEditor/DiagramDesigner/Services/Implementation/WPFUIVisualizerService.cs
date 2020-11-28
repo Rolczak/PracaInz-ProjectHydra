@@ -27,7 +27,8 @@ namespace ProjectHydraDesktop.TacticalEditor
                 win.Owner = Application.Current.MainWindow;
                 if (win != null)
                 {
-                    return win.ShowDialog();
+                    bool? retval = win.ShowDialog();
+                    return retval;
                 }
             }
             else
@@ -38,11 +39,44 @@ namespace ProjectHydraDesktop.TacticalEditor
         }
         public bool? ShowFriendlyUnitEditDialog(ref FriendlyUnitModel unitModel)
         {
-            PopupFriendlyUnitEditWindow win = new PopupFriendlyUnitEditWindow(ref unitModel);
-            win.Owner = Application.Current.MainWindow;
-            if (win != null)
+            if (!System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
             {
-                return win.ShowDialog();
+                PopupFriendlyUnitEditWindow win = new PopupFriendlyUnitEditWindow(ref unitModel);
+                win.Owner = Application.Current.MainWindow;
+                if (win != null)
+                {
+
+                    return win.ShowDialog();
+                }
+            }
+            else
+            {
+                PopupFriendlyUnitEditPage page = new PopupFriendlyUnitEditPage(ref unitModel);
+                if(page != null)
+                {
+                    bool? retval = page.ShowDialog();
+                    return retval;
+                }
+            }
+
+            return false;
+        }
+
+        public bool? ShowTextEditDialog(ref TextModel textModel)
+        {
+            if (!System.Windows.Interop.BrowserInteropHelper.IsBrowserHosted)
+            {
+                TextEditWindow win = new TextEditWindow(ref textModel);
+                win.Owner = Application.Current.MainWindow;
+                if (win != null)
+                {
+                    bool? retval = win.ShowDialog();
+                    return retval;
+                }
+            }
+            else
+            {
+                return false;
             }
             return false;
         }

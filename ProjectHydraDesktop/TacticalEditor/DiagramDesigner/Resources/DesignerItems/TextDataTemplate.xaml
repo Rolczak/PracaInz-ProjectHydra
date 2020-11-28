@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ProjectHydraDesktop.TacticalEditor.DiagramDesigner"
+                    xmlns:c="clr-namespace:ProjectHydraDesktop.TacticalEditor">
+    <!-- DataTemplate for DesignerCanvas look and feel -->
+    <DataTemplate DataType="{x:Type local:TextViewModel}">
+        <Grid>
+            <TextBlock FontFamily="Verdana" Text="{Binding TextModel.Text}" 
+                       Foreground="{Binding TextModel.TextColor}" 
+                       FontSize="{Binding TextModel.TextSize}" 
+                       IsHitTestVisible="True" Cursor="Help" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"
+                       TextAlignment="Center">
+                <TextBlock.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowDataChangeWindowCommand}" />
+                </TextBlock.InputBindings>
+            </TextBlock>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

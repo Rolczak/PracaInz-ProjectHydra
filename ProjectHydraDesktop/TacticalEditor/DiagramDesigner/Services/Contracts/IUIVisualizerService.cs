@@ -9,5 +9,7 @@ namespace ProjectHydraDesktop.TacticalEditor
     {
         bool? ShowUnitEditDialog(ref Dictionary<int, string> colorTypes, ref Integer selected);
         bool? ShowFriendlyUnitEditDialog(ref FriendlyUnitModel unitModel);
+
+        bool? ShowTextEditDialog(ref TextModel textModel);
     }
 }

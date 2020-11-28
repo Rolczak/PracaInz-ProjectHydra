@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectHydraAPI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -37,6 +38,21 @@ namespace ProjectHydraAPI.Models
         public string DeputyCommanderName { get; set; }
         public string ParentUnitName { get; set; }
 
+    }
+
+    public class UnitDetails
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string CommanderId { get; set; }
+        public virtual UserDetailsModel Commander { get; set; }
+        public string DeputyCommanderId { get; set; }
+        public virtual UserDetailsModel DeputyCommander { get; set; }
+
+        public virtual List<UnitVM> ChildernUnits { get; set; }
+        public virtual UnitVM Parent { get; set; }
+
+        public virtual List<UserDetailsModel> SoldiersInUnit { get; set; }
     }
 }
 

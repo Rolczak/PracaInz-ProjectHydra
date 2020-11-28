@@ -1,0 +1,73 @@
+﻿<Page x:Class="ProjectHydraDesktop.Pages.MyUnitPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjectHydraDesktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MyUnitPage"
+      xmlns:ui="http://schemas.modernwpf.com/2019">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition  Height="*"/>
+            <RowDefinition  Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock  Grid.Row="0" Text="Mój pododdział" Style="{DynamicResource TitleTextBlockStyle}" />
+
+        <ScrollViewer  Grid.Row="1">
+            <StackPanel Margin="10">
+                <TextBlock Text="Nazwa " Style="{DynamicResource SubtitleTextBlockStyle}"/>
+                <TextBlock Text="{Binding UnitDetails.Name}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                <TextBlock Text="Dowódca " Style="{DynamicResource SubtitleTextBlockStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding UnitDetails.Commander.RankName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                    <TextBlock Text=" " />
+                    <TextBlock Text="{Binding UnitDetails.Commander.FirstName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                    <TextBlock Text=" " />
+                    <TextBlock Text="{Binding UnitDetails.Commander.LastName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                </StackPanel>
+                <TextBlock Text="Zastępca Dowódcy " Style="{DynamicResource SubtitleTextBlockStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding UnitDetails.DeputyCommander.RankName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                    <TextBlock Text=" " />
+                    <TextBlock Text="{Binding UnitDetails.DeputyCommander.FirstName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                    <TextBlock Text=" " />
+                    <TextBlock Text="{Binding UnitDetails.DeputyCommander.LastName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                </StackPanel>
+                <TextBlock Text="Nadrzędny pododdział " Style="{DynamicResource SubtitleTextBlockStyle}"/>
+                <Border         BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
+                            BorderThickness="1"
+                            Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding UnitDetails.Parent.Name}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                        <TextBlock Text="Dowódca" Style="{DynamicResource BaseTextBlockStyle}"/>
+                        <TextBlock Text="{Binding UnitDetails.Parent.CommanderName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                        <TextBlock Text="Zastępca" Style="{DynamicResource BaseTextBlockStyle}"/>
+                        <TextBlock Text="{Binding UnitDetails.Parent.DeputyCommanderName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                        <TextBlock Text="Nadrzędny poddodział" Style="{DynamicResource BaseTextBlockStyle}"/>
+                        <TextBlock Text="{Binding UnitDetails.Parent.ParentUnitName}" Style="{DynamicResource CaptionTextBlockStyle}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+       
+        <Grid Grid.Row="2">
+            <TextBlock Text="Członkowie pododdziału" Style="{DynamicResource SubtitleTextBlockStyle}" />
+            <ListView x:Name="SoldiersLV" Grid.Row="2" ItemsSource="{Binding UnitDetails.SoldiersInUnit}" Margin="0 30 0 0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Stopień" Width="200" DisplayMemberBinding="{Binding Path=RankName}"/>
+                        <GridViewColumn Header="Imię" Width="200" DisplayMemberBinding="{Binding Path=FirstName}" />
+                        <GridViewColumn Header="Nazwisko" Width="200" DisplayMemberBinding="{Binding Path=LastName}"/>
+                        <GridViewColumn Header="Email" Width="200" DisplayMemberBinding="{Binding Path=Username}"/>
+                        <GridViewColumn Header="Numer Telefonu" Width="200" DisplayMemberBinding="{Binding Path=PhoneNumber}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,77 @@
+﻿<Page x:Class="ProjectHydraDesktop.Pages.MyGradesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjectHydraRestLibary.Models;assembly=ProjectHydraRestLibary"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MyGrades"
+      xmlns:ui="http://schemas.modernwpf.com/2019">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height ="50" />
+            <RowDefinition Height ="20" />
+            <RowDefinition Height ="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Moje Oceny" Style="{ui:ThemeResource TitleTextBlockStyle}"/>
+        <Grid Height="50" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Zajęcia"  HorizontalAlignment="Center" Style="{ui:ThemeResource SubheaderTextBlockStyle}"/>
+            <TextBlock Grid.Column="1" Text="Ocena"  HorizontalAlignment="Center" Style="{ui:ThemeResource SubheaderTextBlockStyle}"/>
+            <TextBlock Grid.Column="2" Text="Komentarz"  HorizontalAlignment="Center" Style="{ui:ThemeResource SubheaderTextBlockStyle}"/>
+        </Grid>
+        <Separator Grid.Row="2"/>
+        <ui:ListView ItemsSource="{Binding Grades}" Grid.Row="3">
+            <ui:ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:GradeVM}" >
+                    <Grid Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="300" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding LessonName}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding GradeNumber}" Grid.Column="1" Width="50" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="White">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding GradeNumber}" Value="2.0">
+                                            <Setter Property="Background" Value="{StaticResource Grade2}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding GradeNumber}" Value="2.5">
+                                            <Setter Property="Background" Value="{StaticResource Grade25}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding GradeNumber}" Value="3.0">
+                                            <Setter Property="Background" Value="{StaticResource Grade3}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding GradeNumber}" Value="3.5">
+                                            <Setter Property="Background" Value="{StaticResource Grade35}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding GradeNumber}" Value="4">
+                                            <Setter Property="Background" Value="{StaticResource Grade4}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding GradeNumber}" Value="4.5">
+                                            <Setter Property="Background" Value="{StaticResource Grade45}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding GradeNumber}" Value="5">
+                                            <Setter Property="Background" Value="{StaticResource Grade5}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Margin="10 0 0 0" Text="{Binding Comment}" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ui:ListView.ItemTemplate>
+        </ui:ListView>
+
+    </Grid>
+</Page>

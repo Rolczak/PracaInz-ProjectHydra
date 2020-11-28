@@ -4,8 +4,8 @@
                     xmlns:c="clr-namespace:ProjectHydraDesktop.TacticalEditor">
     <!-- DataTemplate for DesignerCanvas look and feel -->
     <DataTemplate DataType="{x:Type local:FriendlyUnitViewModel}">
-        <Grid>
-            <Rectangle Width="50" Height="30"  Stroke="Black" StrokeThickness="1" IsHitTestVisible="False" Fill="{DynamicResource FriendlyColor}">
+        <Grid Name="ItemGrid" >
+            <Rectangle Width="50" Height="30"  Stroke="Black" StrokeThickness="1" IsHitTestVisible="True" Fill="{DynamicResource FriendlyColor}" Cursor="Help">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
                         <Style.Triggers>
@@ -18,8 +18,11 @@
                         </Style.Triggers>
                     </Style>
                 </Rectangle.Style>
+                <Rectangle.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowDataChangeWindowCommand}" />
+                </Rectangle.InputBindings>
             </Rectangle>
-            <ContentControl Width="50" Height="50">
+            <ContentControl Width="50" Height="50" IsHitTestVisible="False">
                 <ContentControl.Resources>
                     <ResourceDictionary Source="../UnitTypeStyle.xaml" />
                 </ContentControl.Resources>
@@ -45,7 +48,7 @@
                     </Style>
                 </ContentControl.Style>
             </ContentControl>
-            <ContentControl Width="50" Height="20" Margin="0 0 0 50">
+            <ContentControl Width="50" Height="50" Margin="0 0 0 30" IsHitTestVisible="False">
                 <ContentControl.Resources>
                     <ResourceDictionary Source="../UnitSize.xaml" />
                 </ContentControl.Resources>
@@ -87,11 +90,6 @@
                 </ContentControl.Style>
             </ContentControl>
             <TextBlock Visibility="{Binding Probably, Converter={x:Static local:ReverseBoolToVisibilityConverter.Instance}}" Text="?" IsHitTestVisible="False" Margin="75,25,0,0" Foreground="Black" />
-            <Button HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="5"
-                    Template="{StaticResource infoButtonTemplate}"
-                    Command="{Binding ShowDataChangeWindowCommand}" />
         </Grid>
     </DataTemplate>
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ProjectHydraRestLibary;
 using ProjectHydraRestLibary.Models;
 using ProjectHydraRestLibary.Services;
 using System.ComponentModel;
@@ -41,7 +42,7 @@ namespace ProjectHydraDesktop.Pages
 
         private async Task LoadUserDataAsync()
         {
-            UserDetails = await _userService.getUserDetails(_authModel.UserId);
+            UserDetails = await _userService.GetUserDetails(_authModel.UserId);
         }
 
         protected void OnPropertyChanged(string name)

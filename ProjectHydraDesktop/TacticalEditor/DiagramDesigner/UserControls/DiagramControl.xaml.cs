@@ -22,6 +22,7 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
         public DiagramControl()
         {
             InitializeComponent();
+            Mediator.Instance.Register(this);
         }
 
         private void DesignerCanvas_Loaded(object sender, RoutedEventArgs e)
@@ -29,5 +30,35 @@ namespace ProjectHydraDesktop.TacticalEditor.DiagramDesigner
             DesignerCanvas myDesignerCanvas = sender as DesignerCanvas;
             zoomBox.DesignerCanvas = myDesignerCanvas;
         }
+        [MediatorMessageSink("ClearCanvas")]
+        public void ClearCanvas(bool dummy)
+        {
+            Dispatcher.Invoke(() => {
+                DrawingCanvasIC.Strokes.Clear();
+                DrawingCanvasIC.Background = new SolidColorBrush(Colors.White);
+            });
+        }
+        [MediatorMessageSink("UndoDrawing")]
+        public void UndoDrawing(bool dummy)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (DrawingCanvasIC.Strokes.Count > 0)
+                {
+                    DrawingCanvasIC.Strokes.RemoveAt(DrawingCanvasIC.Strokes.Count - 1);
+                }   
+            });
+        }
+
+        
+        [MediatorMessageSink("SetInkCanvasBackground")]
+        public void SetInkCanvasBG(BitmapImage bg)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                DrawingCanvasIC.Background = new ImageBrush(bg);
+            });
+        }
+
     }
 }

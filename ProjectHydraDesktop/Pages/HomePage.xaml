@@ -25,9 +25,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Profil Użytkownika" FontSize="24" FontWeight="Bold"/>
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding UserDetails.Id}" />
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Poddodział:"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Profil Użytkownika" Style="{ui:ThemeResource TitleTextBlockStyle}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Pododdział:"/>
         <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding UserDetails.UnitName}"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="Stopień:"/>
         <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding UserDetails.RankName}"/>

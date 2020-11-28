@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProjectHydraDesktop"
+        xmlns:local="clr-namespace:ProjectHydraDesktop.TacticalEditor.DiagramDesigner"
         mc:Ignorable="d"
         Title="Project Hydra" Height="600" Width="1200"
         xmlns:ui="http://schemas.modernwpf.com/2019"
@@ -16,11 +16,29 @@
                            IsSettingsVisible="False" 
                            SelectionChanged="MainNavigation_SelectionChanged"
                            IsBackButtonVisible="Collapsed">
+
             <ui:NavigationView.MenuItems>
+                <Image x:Name="logoImage" Source="Images/logowhite.png" RenderOptions.BitmapScalingMode="Fant" Tag="HomePage" Visibility="{Binding ElementName=MainNavigation, Path=IsPaneOpen, Converter={x:Static local:BoolToVisibilityConverter.Instance}}"/>
                 <ui:NavigationViewItemHeader Content="Użytkownik" />
-                <ui:NavigationViewItem Content="Strona Główna" Icon="Home" ToolTipService.ToolTip="Home" Tag="HomePage" />
+                <ui:NavigationViewItem Content="Strona Główna" Icon="Home" ToolTipService.ToolTip="Dom" Tag="HomePage" />
+                <ui:NavigationViewItem Content="Moje zajęcia" Icon="Calendar" ToolTipService.ToolTip="Zajęcia" Tag="MyLessonsPage" />
+                <ui:NavigationViewItem Content="Moje oceny"  ToolTipService.ToolTip="Oceny" Tag="MyGradesPage">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7BE;" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem Content="Mój pododdział" ToolTipService.ToolTip="Pododdział" Tag="MyUnitPage">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE902;" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
                 <ui:NavigationViewItemSeparator />
-                <ui:NavigationViewItem Content="Edytor Sytuacji Taktycznych" Icon="Edit" ToolTipService.ToolTip="Edit" Tag="TacticalEditorPage" />
+                
+                <ui:NavigationViewItem Content="Edytor Sytuacji Taktycznych" ToolTipService.ToolTip="Edit" Tag="TacticalEditorPage" >
+                    <ui:NavigationViewItem.Icon>
+                        <ui:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE826;" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
             <Grid>
                 <ui:Frame x:Name="ContentFrame" />

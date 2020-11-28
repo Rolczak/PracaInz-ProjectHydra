@@ -5,6 +5,7 @@ namespace ProjectHydraRestLibary.Services
 {
     public interface IUserService
     {
-        Task<UserDetailsModel> getUserDetails(string id);
+        Task<UserDetailsModel> GetUserDetails(string id);
+        Task<UserViewModel> GetUserViewModel(string id);
     }
 }

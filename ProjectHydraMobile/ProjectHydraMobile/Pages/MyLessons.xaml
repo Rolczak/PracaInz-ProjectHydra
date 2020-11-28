@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHydraMobile.Pages.MyLessons"
+             xmlns:local="clr-namespace:ProjectHydraRestLibary.ViewModels;assembly=ProjectHydraRestLibary" >
+
+    <ContentPage.BindingContext>
+        <local:MyLessonsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Lessons}" HasUnevenRows="True" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="Temat:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Topic}" LineBreakMode="WordWrap" FontSize="Body"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="Prowadzący:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding TeacherName}" LineBreakMode="WordWrap" FontSize="Body"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Text="Pododdział:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                                <Label Grid.Row="3" Grid.Column="0" Text="{Binding Unit}" LineBreakMode="WordWrap" FontSize="Body"/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="Miejsce:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Place}" LineBreakMode="WordWrap" FontSize="Body"/>
+
+                                <Label Grid.Row="4" Grid.Column="0" Text="Data:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                                <Label Grid.Row="5" Grid.Column="0" Text="{Binding Date, StringFormat='{}{0:dd:MM:yyyy hh:mm}'}" LineBreakMode="WordWrap" FontSize="Body"/>
+                                <Label Grid.Row="4" Grid.Column="1" Text="Czas:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                                <Label Grid.Row="5" Grid.Column="1" Text="{Binding Path=Time, StringFormat='{0}h'}" LineBreakMode="WordWrap" FontSize="Body"/>
+
+                                <Label Grid.Row="6"  Text="Komentarz:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                                <Label Grid.Row="7" Text="{Binding Comment}" LineBreakMode="WordWrap" FontSize="Body" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

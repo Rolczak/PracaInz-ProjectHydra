@@ -1,7 +1,9 @@
-﻿using ProjectHydraRestLibary.Services;
+﻿using ModernWpf;
+using ProjectHydraRestLibary.Services;
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace ProjectHydraDesktop.Views
 {
@@ -21,8 +23,16 @@ namespace ProjectHydraDesktop.Views
             DataContext = this;
             InitializeComponent();
             LoginStr = "admin@admin.pl";
-        }
 
+            if (ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark)
+            {
+                LogoImage.Source = new BitmapImage(new Uri(@"../Images/logowhite.png", UriKind.Relative));
+            }
+            else
+            {
+                LogoImage.Source = new BitmapImage(new Uri(@"../Images/logo.png", UriKind.Relative));
+            }
+        }
         private string _loginStr;
         public string LoginStr
         {

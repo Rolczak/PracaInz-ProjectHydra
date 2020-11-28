@@ -5,24 +5,24 @@
 
     </DataTemplate>
     <DataTemplate x:Key="Section">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Margin="1 0 0 0">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"  Margin="0 0 0 20">
                 <Ellipse Width="5" Height="5" Fill="Black" />
             </StackPanel>
            
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Team">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
                 <Ellipse Width="5" Height="5" Fill="Black" Margin="0 0 1 0"/>
                 <Ellipse Width="5" Height="5" Fill="Black" />
             </StackPanel>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Platoon">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="1 0 0 0" >
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20" >
                 <Ellipse Width="5" Height="5" Fill="Black" Margin="0 0 1 0"/>
                 <Ellipse Width="5" Height="5" Fill="Black" Margin="0 0 1 0"/>
                 <Ellipse Width="5" Height="5" Fill="Black" />
@@ -30,46 +30,46 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Company">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="3 0 0 0">
-                <Line Y1="15" Y2="7" Stroke="Black" StrokeThickness="2" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                <Line Y1="0" Y2="10" Stroke="Black" StrokeThickness="1" />
             </StackPanel>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Battalion">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="3 0 0 0" >
-                <Line Y1="15" Y2="7" Stroke="Black" StrokeThickness="2" Margin="0 0 3 0" />
-                <Line Y1="15" Y2="7" Stroke="Black" StrokeThickness="2" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20" >
+                <Line Y1="0" Y2="10" Stroke="Black" StrokeThickness="1" Margin="0 0 3 0" />
+                <Line Y1="0" Y2="10" Stroke="Black" StrokeThickness="1" />
             </StackPanel>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Regiment">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="3 0 0 0" >
-                <Line Y1="15" Y2="7" Stroke="Black" StrokeThickness="2" Margin="0 0 3 0" />
-                <Line Y1="15" Y2="7" Stroke="Black" StrokeThickness="2" Margin="0 0 3 0" />
-                <Line Y1="15" Y2="7" Stroke="Black" StrokeThickness="2" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"> 
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20" >
+                <Line Y1="0" Y2="10" Stroke="Black" StrokeThickness="1" Margin="0 0 3 0" />
+                <Line Y1="0" Y2="10" Stroke="Black" StrokeThickness="1" Margin="0 0 3 0" />
+                <Line Y1="0" Y2="10" Stroke="Black" StrokeThickness="1" />
             </StackPanel>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Brigade">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
                 <TextBlock Text="X" Foreground="Black"/>
             </StackPanel>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Division">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="3 0 0 0">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
                 <TextBlock Text="XX" Foreground="Black"/>
             </StackPanel>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="Corps">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"  Margin="3 0 0 0" >
+        <Grid  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"  Margin="0 0 0 20" >
                 <TextBlock Text="XXX" Foreground="Black"/>
             </StackPanel>
         </Grid>

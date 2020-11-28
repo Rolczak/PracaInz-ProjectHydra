@@ -16,7 +16,7 @@ namespace ProjectHydraAPI.Validators
             _db = db;
 
             RuleFor(user => user.Email).NotEmpty().EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible)
-                .Must(IsEmailUnique).WithMessage("Email already taken.");
+                .Must(IsEmailUnique).WithMessage("Email zajęty.");
             RuleFor(user => user.FirstName).NotEmpty().MaximumLength(50);
             RuleFor(user => user.LastName).NotEmpty().MaximumLength(50);
             RuleFor(user => user.Password).NotEmpty().MinimumLength(7);

@@ -13,6 +13,9 @@ namespace ProjectHydraDesktop.TacticalEditor
         {
             toolBoxItems.Add(new ToolBoxData("../Images/FriendlyUnit.png", typeof(FriendlyUnitViewModel)));
             toolBoxItems.Add(new ToolBoxData("../Images/EnemyUnit.png", typeof(EnemyUnitViewModel)));
+            toolBoxItems.Add(new ToolBoxData("../Images/NeutralUnit.png", typeof(NeutralUnitViewModel)));
+            toolBoxItems.Add(new ToolBoxData("../Images/UnknownUnit.png", typeof(UnknownUnitViewModel)));
+            toolBoxItems.Add(new ToolBoxData("../Images/TextIcon.png", typeof(TextViewModel)));
         }
 
         public List<ToolBoxData> ToolBoxItems

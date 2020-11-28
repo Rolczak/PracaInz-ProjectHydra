@@ -112,6 +112,7 @@ namespace ProjectHydraAPI.Controllers
             try
             {
                 var classes = await _context.Classes.Include(c => c.Teacher).ThenInclude(t => t.Rank).Where(c => ParentUnitsIds.Contains(c.UnitId.GetValueOrDefault())).ToListAsync();
+                classes = classes.OrderBy(c => c.Date).ToList();
                 return Ok(_mapper.Map<List<Class>, List<ClassVM>>(classes));
             }
             catch

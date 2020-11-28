@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHydraMobile.Pages.MyUnitPage"
+             xmlns:local="clr-namespace:ProjectHydraRestLibary.ViewModels;assembly=ProjectHydraRestLibary"
+             Title="Mój pododdział">
+    <ContentPage.BindingContext>
+        <local:MyUnitViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="Nazwa:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+            <Label Text="{Binding UnitDetails.Name}" LineBreakMode="WordWrap" FontSize="Body" />
+            <Label Text="Dowódca:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding UnitDetails.Commander.RankName}" LineBreakMode="WordWrap" FontSize="Body" />
+                <Label Text=" " />
+                <Label Text="{Binding UnitDetails.Commander.FirstName}" LineBreakMode="WordWrap" FontSize="Body"  />
+                <Label Text=" " />
+                <Label Text="{Binding UnitDetails.Commander.LastName}" LineBreakMode="WordWrap" FontSize="Body"  />
+            </StackLayout>
+            <Label Text="Zastępca dowódcy:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding UnitDetails.DeputyCommander.RankName}" LineBreakMode="WordWrap" FontSize="Body" />
+                <Label Text=" " />
+                <Label Text="{Binding UnitDetails.DeputyCommander.FirstName}" LineBreakMode="WordWrap" FontSize="Body"  />
+                <Label Text=" " />
+                <Label Text="{Binding UnitDetails.DeputyCommander.LastName}" LineBreakMode="WordWrap" FontSize="Body"  />
+            </StackLayout>
+            <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=#4c4c4c}">
+                <StackLayout>
+                    <Label Text="Nadrzędny pododdział:"
+                       FontSize="Medium"
+                       FontAttributes="Bold" />
+                    <BoxView Color="Gray"
+                         HeightRequest="2"
+                         HorizontalOptions="Fill" />
+                    <Label Text="{Binding UnitDetails.Parent.Name}" LineBreakMode="WordWrap" FontSize="Body" />
+                    <Label Text="Dowódca:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                    <Label Text="{Binding UnitDetails.Parent.CommanderName}" LineBreakMode="WordWrap" FontSize="Body" />
+                    <Label Text="Zastępca dowódcy:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                    <Label Text="{Binding UnitDetails.Parent.DeputyCommanderName}" LineBreakMode="WordWrap" FontSize="Body" />
+                    <Label Text="Nadrzędny pododdział:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                    <Label Text="{Binding UnitDetails.Parent.ParentUnitName}" LineBreakMode="WordWrap" FontSize="Body" />
+                </StackLayout>
+            </Frame>
+            <Label Text="Członkowie pododdziału:" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+            <ListView ItemsSource="{Binding UnitDetails.SoldiersInUnit}" HasUnevenRows="True">
+                <ListView.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="Stopień" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="Imię" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                        <Label Grid.Column="2" Text="Nazwisko" LineBreakMode="NoWrap" FontSize="Body" FontAttributes="Bold" />
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding RankName}" LineBreakMode="WordWrap" FontSize="Body" />
+                                <Label Grid.Column="1" Text="{Binding FirstName}" LineBreakMode="WordWrap" FontSize="Body" />
+                                <Label Grid.Column="2" Text="{Binding LastName}" LineBreakMode="WordWrap" FontSize="Body" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

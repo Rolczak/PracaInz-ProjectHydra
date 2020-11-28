@@ -4,41 +4,170 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjectHydraDesktop.TacticalEditor"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:s="clr-namespace:ProjectHydraDesktop.TacticalEditor.DiagramDesigner"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Edytor Sytuacji Taktycznych"
       xmlns:ui="http://schemas.modernwpf.com/2019">
     <Page.InputBindings>
-        <KeyBinding Key="Del"
-                    Command="{Binding DeleteSelectedItemsCommand}"/>
+        <KeyBinding Key="Del" Command="{Binding DeleteSelectedItemsCommand}" />
     </Page.InputBindings>
+    <Page.Resources>
+        <sys:Double x:Key="SwatchSize">32</sys:Double>
+    </Page.Resources>
+
     <DockPanel Margin="0">
-        <ToolBar Height="35" DockPanel.Dock="Top">
-            <Button ToolTip="New"
-                    Content="New"
-					Margin="8,0,3,0"
-                    Command="{Binding CreateNewDiagramCommand}"/>
-        </ToolBar>
+        <ui:CommandBar Height="35"  DockPanel.Dock="Top" HorizontalAlignment="Left">
+            <ui:AppBarButton Icon="Page" Label="Nowy" Command="{Binding CreateNewDiagramCommand}"/>
+            <ui:AppBarButton Icon="Delete" Label="Usuń Zaznaczone" Command="{Binding DeleteSelectedItemsCommand}" />
+            <ui:AppBarToggleButton Icon="Edit" Label="Rysuj" IsChecked="{Binding IsDrawingChecked}" />
+            <ui:AppBarButton Icon="Undo" Label="Cofnij" Command="{Binding UndoDrawingCommand}" />
+            <ui:AppBarButton Icon="OpenFile" Label="Wczytaj tło" Click="AppBarButton_Click" />
+        </ui:CommandBar>
         <Grid>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="250" MinWidth="150" />
             </Grid.ColumnDefinitions>
+
             <!-- ToolBox Control -->
-        <local:ToolBoxControl Grid.Column="1"
+            <ScrollViewer Grid.Column="1" Padding="5">
+                <StackPanel>
+                    <TextBlock Text="Symbole" Style="{DynamicResource TitleTextBlockStyle}" />
+                    <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
+                            BorderThickness="1"
+                            Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                        <local:ToolBoxControl 
                                   DataContext="{Binding ToolBoxViewModel}" />
-        <GridSplitter Grid.Column="1"
-						  HorizontalAlignment="Left"
-						  VerticalAlignment="Stretch"
-						  Background="Transparent"
-						  Width="3" />
-        <!-- Diagram Control -->
-        <s:DiagramControl Grid.Column="0"
+                    </Border>
+                    <TextBlock Text="Pędzel" Style="{DynamicResource TitleTextBlockStyle}" />
+                    <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
+                            BorderThickness="1"
+                            Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+
+
+                        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Kolor" Grid.Row="0" Style="{DynamicResource BaseTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                <ui:SplitButton
+                        x:Name="myColorButton"
+                        AutomationProperties.Name="Font color"
+                                     Grid.Row="1">
+                                    <Rectangle
+                            x:Name="CurrentColor"
+                            Width="{StaticResource SwatchSize}"
+                            Height="{StaticResource SwatchSize}"
+                            Fill="Black"
+                            Margin="0" />
+                                    <ui:SplitButton.Flyout>
+                                        <ui:Flyout Placement="BottomEdgeAlignedLeft">
+                                            <UniformGrid
+                                    Rows="3"
+                                    Columns="2">
+                                                <UniformGrid.Resources>
+                                                    <Style TargetType="Rectangle">
+                                                        <Setter Property="Width" Value="{StaticResource SwatchSize}" />
+                                                        <Setter Property="Height" Value="{StaticResource SwatchSize}" />
+                                                    </Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                        <Setter Property="Padding" Value="0" />
+                                                        <Setter Property="MinWidth" Value="0" />
+                                                        <Setter Property="MinHeight" Value="0" />
+                                                        <Setter Property="Margin" Value="6" />
+                                                    </Style>
+                                                </UniformGrid.Resources>
+                                                <Button
+                                        Click="ColorButton_Click"
+                                        AutomationProperties.Name="Red">
+                                                    <Button.Content>
+                                                        <Rectangle Fill="{StaticResource EnemyColor}" />
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button
+                                        Click="ColorButton_Click"
+                                        AutomationProperties.Name="Yellow">
+                                                    <Button.Content>
+                                                        <Rectangle Fill="{StaticResource UnknowColor}" />
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button
+                                        Click="ColorButton_Click"
+                                        AutomationProperties.Name="Green">
+                                                    <Button.Content>
+                                                        <Rectangle Fill="{StaticResource NeutralColor}" />
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button
+                                        Click="ColorButton_Click"
+                                        AutomationProperties.Name="Blue">
+                                                    <Button.Content>
+                                                        <Rectangle Fill="{StaticResource FriendlyColor}" />
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button
+                                        Click="ColorButton_Click"
+                                        AutomationProperties.Name="Gray">
+                                                    <Button.Content>
+                                                        <Rectangle Fill="Gray" />
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button
+                                        Click="ColorButton_Click"
+                                        AutomationProperties.Name="Black">
+                                                    <Button.Content>
+                                                        <Rectangle Fill="Black" />
+                                                    </Button.Content>
+                                                </Button>
+                                            </UniformGrid>
+                                        </ui:Flyout>
+                                    </ui:SplitButton.Flyout>
+                                </ui:SplitButton>
+                            <Separator Grid.Row="2" />
+                            <TextBlock Grid.Row="3" Text="Wysokość pędzla" Style="{DynamicResource BaseTextBlockStyle}" />
+                            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                                <Slider
+                        x:Name="Slider1"
+                        AutomationProperties.Name="simple slider"
+                        Width="180" Minimum="1" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="Both" ValueChanged="Slider1_ValueChanged"/>
+                                <TextBlock
+                        Style="{DynamicResource OutputTextBlockStyle}"
+                        Text="{Binding Value, ElementName=Slider1}" />
+                            </StackPanel>
+                            <TextBlock Grid.Row="5" Text="Szerokość pędzla" Style="{DynamicResource BaseTextBlockStyle}" />
+                            <StackPanel Grid.Row="6" Orientation="Horizontal">
+                                <Slider
+                        x:Name="Slider2"
+                        Width="180" Minimum="1" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="Both" ValueChanged="Slider2_ValueChanged"/>
+                                <TextBlock
+                        Style="{DynamicResource OutputTextBlockStyle}"
+                        Text="{Binding Value, ElementName=Slider2}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Diagram Control -->
+            <s:DiagramControl Grid.Column="0"
                                   DataContext="{Binding DiagramViewModel}"
                                   Margin="3,1,0,0" />
-     
-    </Grid>
+
+        </Grid>
     </DockPanel>
 </Page>

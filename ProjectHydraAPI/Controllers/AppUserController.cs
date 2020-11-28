@@ -78,6 +78,7 @@ namespace ProjectHydraAPI.Controllers
             userDb.RankId = rank.Id;
             userDb.UserName = user.Username;
             userDb.NormalizedUserName = user.Username.ToUpper();
+            userDb.UnitId = user.UnitId;
 
             try
             {

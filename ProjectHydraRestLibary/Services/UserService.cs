@@ -14,12 +14,24 @@ namespace ProjectHydraRestLibary.Services
             _apiHelper = aPIHelper;
         }
 
-        public async Task<UserDetailsModel> getUserDetails(string id)
+        public async Task<UserDetailsModel> GetUserDetails(string id)
         {
             var response = await _apiHelper.GetApiClient().GetAsync("/api/appuser/" + id);
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadAsAsync<UserDetailsModel>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+        public async Task<UserViewModel> GetUserViewModel(string id)
+        {
+            var response = await _apiHelper.GetApiClient().GetAsync("/api/appuser/" + id);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<UserViewModel>();
             }
             else
             {

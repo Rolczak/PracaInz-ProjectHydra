@@ -25,6 +25,29 @@ namespace ProjectHydraAPI.MapProfiles
                     opt.PreCondition(u => (u.Parent != null));
                     opt.MapFrom(u => u.Parent.Name);
                 });
+            CreateMap<Unit, UnitDetails>()
+                .ForMember(vm => vm.Commander, opt =>
+                {
+                    opt.PreCondition(u => u.Commander != null);
+                    opt.MapFrom(u => u.Commander);
+                })
+                .ForMember(vm => vm.ChildernUnits, opt =>
+                {
+                    opt.PreCondition(u => u.ChildernUnits != null);
+                    opt.MapFrom(u => u.ChildernUnits);
+                })
+                .ForMember(vm => vm.Parent, opt =>
+                {
+                    opt.PreCondition(u => u.Parent != null);
+                    opt.MapFrom(u => u.Parent);
+                })
+                .ForMember(vm => vm.SoldiersInUnit, opt =>
+                {
+                    opt.PreCondition(u => u.SoldiersInUnit != null);
+                    opt.MapFrom(u => u.SoldiersInUnit);
+                });
+                
+
         }
     }
 }
