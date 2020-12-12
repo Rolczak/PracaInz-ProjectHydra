@@ -44,11 +44,13 @@ namespace ProjectHydraAPI.Controllers
         public async Task<ActionResult<UnitDetails>> GetUnit(int id)
         {
             var unit = await _context.Units
-                .Include(u => u.SoldiersInUnit)
+                .Include(u => u.SoldiersInUnit).ThenInclude(u=>u.Rank)
                 .Include(u => u.Commander).ThenInclude(user => user.Rank)
                 .Include(u => u.DeputyCommander).ThenInclude(user => user.Rank)
                 .Include(u => u.ChildernUnits)
-                .Include(u => u.Parent)
+                .Include(u => u.Parent).ThenInclude(u => u.Commander).ThenInclude(u=>u.Rank)
+                .Include(u => u.Parent).ThenInclude(u => u.DeputyCommander).ThenInclude(u => u.Rank)
+                .Include(u => u.Parent).ThenInclude(u => u.Parent)
                 .Where(u => u.Id == id).FirstOrDefaultAsync();
 
             if (unit == null)
