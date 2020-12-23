@@ -22,7 +22,6 @@ namespace ProjectHydraDesktop.Views
             _apiHelper = apiHelper;
             DataContext = this;
             InitializeComponent();
-            LoginStr = "admin@admin.pl";
 
             if (ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark)
             {
@@ -84,7 +83,14 @@ namespace ProjectHydraDesktop.Views
             }
             catch (Exception ex)
             {
-                ErrorMessage = ex.Message;
+                if (ex.Message == "0")
+                {
+                    ErrorMessage = "API nie odpowiada";
+                }
+                else
+                {
+                    ErrorMessage = "Dane nieprawidłowe";
+                }
             }
 
         }

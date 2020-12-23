@@ -29,7 +29,7 @@ namespace ProjectHydraMobile
         }
         private void ConfigureServices(IServiceCollection services)
         {
-            ApiHelper.BaseApiUrl = "https://10.0.2.2:5001";
+            ApiHelper.BaseApiUrl = "https://projecthydraapi20201223172124.azurewebsites.net/";
             services.AddSingleton<IApiHelper, ApiHelper>();
             services.AddSingleton<IAuthModel, AuthModel>();
             services.AddScoped<IUserService, UserService>();

@@ -66,7 +66,7 @@ namespace ProjectHydraRestLibary.Services
                 }
                 else
                 {
-                    throw new Exception(response.ReasonPhrase);
+                    throw new Exception(response.StatusCode.ToString());
                 }
             }
         }
